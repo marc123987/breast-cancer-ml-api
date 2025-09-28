@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: breast-cancer-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: breast-cancer
+  template:
+    metadata:
+      labels:
+        app: breast-cancer
+    spec:
+      containers:
+      - name: breast-cancer-container
+        image: breast-cancer-api:v1
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
