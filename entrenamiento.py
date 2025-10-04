@@ -5,6 +5,8 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import joblib
+from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score, accuracy_score
+from prettytable import PrettyTable
 
 # Nombre del archivo
 file_path = "data.csv"
@@ -42,3 +44,18 @@ model.fit(X_train, y_train)
 joblib.dump(model, 'modelo_cancer.pkl')
 
 print("Modelo entrenado y guardado como 'modelo_cancer.pkl'")
+
+# Realizar predicciones sobre el conjunto de prueba escalado
+y_pred = model.predict(X_test)
+
+# Calcula métricas de rendimiento del modelo Random Forest
+accuracy = accuracy_score(y_test, y_pred)*100.0
+f1 = f1_score(y_test, y_pred)*100.0
+precision = precision_score(y_test, y_pred)*100.0
+recall = recall_score(y_test, y_pred)*100.0
+auc = roc_auc_score(y_test, y_pred)*100.0
+
+# Tabla con métricas
+to_show = PrettyTable(['Modelo', 'Exactitud', 'F1-Score', 'Precisión', 'Recall', 'AUC'])
+to_show.add_row(['Random Forest', f'{accuracy:.5f}', f'{f1:.5f}', f'{precision:.5f}', f'{recall:.5f}', f'{auc:.5f}'])
+print(to_show)

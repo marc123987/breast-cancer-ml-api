@@ -1,6 +1,6 @@
 # Breast Cancer ML Model API
 
-Este proyecto implementa un modelo de Machine Learning para la clasificación del dataset Iris usando Random Forest, con una API REST construida con Flask y configuración para despliegue en Kubernetes.
+Este proyecto implementa un modelo de Machine Learning para la clasificación del dataset Breast Cancer usando Random Forest, con una API REST construida con Flask y configuración para despliegue en Kubernetes.
 
 ## 📋 Descripción
 
@@ -9,6 +9,10 @@ El proyecto incluye:
 - **API REST**: Endpoint Flask para realizar predicciones
 - **Containerización**: Dockerfile para crear imagen Docker
 - **Kubernetes**: Archivos YAML para despliegue en K8s
+
+## 📋 Objetivo
+
+Desarrollar un sistema completo que integre un modelo de Machine Learning, exponerlo como API REST mediante Flask y contenedorizado con Docker, automatizando el flujo de trabajo usando buenas prácticas de CI/CD.
 
 ## 🚀 Estructura del Proyecto
 
@@ -215,7 +219,7 @@ kubectl get services
 
 ## 🧪 Pruebas de Ejemplo
 
-Puedes probar diferentes tipos de flores Iris:
+Puedes probar diferentes predicciones (para tumor benigno o maligno):
 
 ```bash
 # Tumor benigno (esperado: 0)
@@ -243,3 +247,9 @@ curl -X POST http://localhost:5000/predict \
 
 - El modelo Random Forest fue entrenado con 80% del dataset completo de Breast cancer (455 muestras)
 - Este proyecto es con fines educativos y demostrativos
+
+## 📝 Reflexiones de lo aprendido
+
+En este proyecto se implementó un proceso de CI/CD mediante la plataforma de GitHub Actions y Docker Hub para aprovechar las ventajas de utilizar una imagen de Docker con un ambiente que sea consistente para la correcta compilación y ejecución de la aplicación, independiente de la infraestructura de los usuarios que hagan uso del contenedor generado a partir de dicha imagen.
+
+Además de contar con el control de versiones que provee GitHub para los archivos de código, los archivos con configuraciones de pipelines y otros archivos, así como GitHub Actions que se encarga de compilar, probar y desplegar el código y archivos de la aplicación en la imagen de Docker Hub de forma automatizada, así que es más eficiente ya que así se puede verificar que los cambios subidos no afecten negativamente el comportamiento de la aplicación gracias a las pruebas automatizadas y el despliegue se realiza de forma más rápida.gracias a los jobs o etapas definidas en el pipeline.
